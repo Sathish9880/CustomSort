@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../scripts/controllers/EmpDataCtrl.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+    <style>
+        td{text-align: center}
+        .sortorder:after {
+            content: '\25b2';
+        }
+        .sortorder.descending:after {
+            content: '\25bc';
+        }
+    </style>
+</head>
+<body ng-app="MyEmpApp" ng-controller="EmpCtrl">
+<h1>Employes Data List
+</h1>
+Search:<input type="text" ng-model="search">
+<table border="2" width="40%" class="table table-bordered table-responsive table-hover">
+    <tr>
+        <Th>Slno</Th>
+        <Th ng-click="sort('name')">Name
+            <span class="sortorder descending"
+                  ng-hide="(sortKey=='name' && reverse==true)"></span>
+
+            <span class="sortorder "
+                  ng-hide="(sortkey=='name' && reverse=='false')"></span>
+        </Th>
+        <Th ng-click="sort('id')">id
+         <span class="sortorder descending"
+               ng-hide="(sortKey=='id' && reverse==true)"></span>
+            <span class="sortorder "
+                  ng-hide="(sortkey=='id' && reverse=='false')"></span>
+
+        </Th>
+        <Th>Salary</Th>
+    </tr>
+    <tr ng-repeat="emp in employes |orderBy:sortKey:reverse">
+    <td>{{$index}}</td>
+    <td>{{emp.name|uppercase}}  </td>
+    <td>{{emp.id}}</td>
+    <td>{{emp.salary}}</td>
+    </tr>
+</table>
+<input type="checkbox" ng-model="res">
+<div ng-hide="false">
+    <h1>hello</h1>
+
+</div>
+<button class="btn-success btn btn-lg" ng-init="count=1;"
+        ng-module="count" ng-click="count=count+1">Add</button>
+{{count}}
+
+</body>
+</html>
